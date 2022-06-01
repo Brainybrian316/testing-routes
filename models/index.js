@@ -1,45 +1,31 @@
-
-// modules to require   *****Added Product 
-const User = require('./User');
-const Candy = require('./Candy');
+// import models
 const Product = require('./Product');
+const Category = require('./Category');
+const Tag = require('./Tag');
+const ProductTag = require('./ProductTag');
 
+// Products belongsTo Category
+Product.belongsTo(Category, {
+  foreignKey: 'category_id'
+});
+// Categories have many Products
+Category.hasMany(Product, {
+  foreignKey: 'category_id'
+});
+// Products belongToMany Tags (through ProductTag)
+Product.belongsToMany(Tag, {
+  through: ProductTag,
+  foreignKey: 'product_id'
+});
+// Tags belongToMany Products (through ProductTag)
+Tag.belongsToMany(Product, {
+  through: ProductTag,
+  foreignKey: 'tag_id'
+});
 
-
-// *this worked at one point here
-// create associations
-
-
-Candy.hasMany(User);
-
-User.belongsToMany(Product, { through: Candy})
-
-Product.belongsToMany(User, { through: Candy})
-
-User.hasOne(Candy);
-
-
-
-
-
-
-
-
-
-
-
-
-// Candy.belongsToMany(User, { 
-//     through: Candy,
-//     foreignKey: 'product_id',
-// });
-
-// Candy.belongsToMany(Product, { 
-//     through: User,
-//     foreignKey: 'user_id',
-//  });
-
-
-
-module.exports = { User, Candy, Product };
-
+module.exports = {
+  Product,
+  Category,
+  Tag,
+  ProductTag,
+};

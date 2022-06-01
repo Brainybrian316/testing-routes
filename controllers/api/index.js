@@ -1,14 +1,10 @@
-// Modules to require
 const router = require('express').Router();
-const userRoutes = require('./user-routes.js');
-const candyRoutes = require('./candy-routes.js');
-// *****THUY added this
-const productRoutes = require('./product-routes.js');
+const categoryRoutes = require('./category-routes');
+const productRoutes = require('./product-routes');
+const tagRoutes = require('./tag-routes');
 
-// add to the routes url --> added after api/
-router.use('/users', userRoutes);
-router.use('/candy', candyRoutes);
-// *****THUY added this
+router.use('/categories', categoryRoutes);
 router.use('/products', productRoutes);
+router.use('/tags', tagRoutes);
 
 module.exports = router;
