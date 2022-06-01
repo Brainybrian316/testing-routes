@@ -1,7 +1,16 @@
 //Modules require -- Added product-seeds file
 const Product = require('../models/Product');
 
-//variable to hold all types of candies
+// const Candy70sData = ['Twix', 'Snickers', 'M&Ms', 'Milky Way', 'Hershey', 'Kit Kat',]
+// const candy70sData = Candy70sData[Math.floor(Math.random() * Candy70sData.length)];
+
+// const Candy80sData = ['hello', '', 'my', 'name', 'is', 'candy',]
+// const candy80sData = Candy80sData[Math.floor(Math.random() * Candy80sData.length)];
+
+// const Candy90sData = ['Tdfa', 'yoyo', 'poopoo', 'meemee', 'hshs', 'dhfdak',]
+// const candy90sData = Candy90sData[Math.floor(Math.random() * Candy90sData.length)];
+
+
 const productData = [
     //expect key value pairs candy_id
     {

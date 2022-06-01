@@ -12,6 +12,7 @@ const userData = [
     city: "Itasca",
     state: "Illinois",
     zipCode: "60143",
+    candyId: 1
   },
   {
     first_name: "Jolly",
@@ -22,6 +23,7 @@ const userData = [
     city: "Orlando",
     state: "Florida",
     zipCode: "32836",
+    candyId: 2
   },
    {
     first_name: "Pixy",
@@ -32,6 +34,7 @@ const userData = [
     city: "Orlando",
     state: "Florida",
     zipCode: "32801",
+
   },
 ];
 
