@@ -22,7 +22,23 @@ Candy.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
- 
+  // user_id: {
+  //   type: DataTypes.INTEGER,
+  //   foreignKey: true,
+  //   references: {
+  //     model: "user",
+  //     key: "id",
+  //   },
+  // },
+  // product_id: {
+  //   type: DataTypes.INTEGER,
+  //   foreignKey: true,
+  //   references: {
+  //     model: "product",
+  //     key: "id",
+  //   },
+  // },
+}, {
   sequelize,
   // the purpose of timestamp is to automatically add the created_at and updated_at columns to the table
   timestamp: false,

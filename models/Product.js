@@ -18,6 +18,14 @@ Product.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
+  // user_id: {
+  //   type: DataTypes.INTEGER,
+  //   foreignKey: true,
+  //   references: {
+  //     model: "user",
+  //     key: "id", 
+  //   },
+  // },
 },
 {
   sequelize,

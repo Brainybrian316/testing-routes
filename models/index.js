@@ -6,13 +6,13 @@ const Product = require('./Product');
 
 
 
+// *this worked at one point here
+// create associations
 
 
 User.belongsToMany(Product, { through: Candy})
 
 Product.belongsToMany(User, { through: Candy})
-
-
 
 
 
