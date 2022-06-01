@@ -35,13 +35,7 @@ app.use(session(sess))
 app.use(express.json());
 // use express.urlencoded to parse urlencoded
 app.use(express.urlencoded({ extended: true }));
-// serve static files from public folder
-app.use(express.static(path.join(__dirname, 'public')));
-//  use handlebars
-app.engine('handlebars', hbs.engine);
-// set handlebars as the default engine
-app.set('view engine', 'handlebars');
-// set up routes and controllers
+
 app.use(routes);
 
 // turn on  connection to db and server
