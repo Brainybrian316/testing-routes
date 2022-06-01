@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
       if (req.body.userIds.length) {
         const productTagIdArr = req.body.userIds.map((user_id) => {
           return {
-            product_id: product.id,
+            candies: product.id,
             user_id,
           };
         });
@@ -97,7 +97,7 @@ router.put('/:id', (req, res) => {
   })
     .then((product) => {
       // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: { product_id: req.params.id } });
+      return ProductTag.findAll({ where: { candies: req.params.id } });
     })
     .then((productTags) => {
       // get list of current tag_ids
@@ -107,7 +107,7 @@ router.put('/:id', (req, res) => {
         .filter((user_id) => !productTagIds.includes(user_id))
         .map((user_id) => {
           return {
-            product_id: req.params.id,
+            candies: req.params.id,
             user_id,
           };
         });
