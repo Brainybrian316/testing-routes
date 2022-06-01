@@ -1,7 +1,7 @@
 // file connects to api/index.js
 const router = require("express").Router();
 const { User, Candy, Product } = require("../../models");
-const withAuth = require("../../utils/auth");
+
 
 
 // GET /api/users  *****Testing product 

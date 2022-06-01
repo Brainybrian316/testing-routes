@@ -1,7 +1,7 @@
 // Modules to require
 const router = require('express').Router();
 const { Candy, User } = require('../../models');
-const withAuth = require('../../utils/auth');
+
 
 // GET request to find all candies
 router.get('/', (req, res) => {
