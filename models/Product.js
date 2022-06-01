@@ -35,7 +35,7 @@ Product.init(
       isInt: true
       }
     },
-    category_id: {
+    candy_box: {
       type: DataTypes.INTEGER,
       references: {
         model: 'category',
