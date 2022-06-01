@@ -12,7 +12,6 @@ const userData = [
     city: "Itasca",
     state: "Illinois",
     zipCode: "60143",
-   
   },
   {
     first_name: "Jolly",
@@ -23,8 +22,6 @@ const userData = [
     city: "Orlando",
     state: "Florida",
     zipCode: "32836",
- 
-
   },
    {
     first_name: "Pixy",
@@ -35,42 +32,7 @@ const userData = [
     city: "Orlando",
     state: "Florida",
     zipCode: "32801",
-
   },
-  {
-    first_name: "Mister",
-    last_name: "Goodbar",
-    email: "Mister@example.com",
-    password: "password123",
-    address: "789 Chocolate Road",
-    city: "Orlando",
-    state: "Florida",
-    zipCode: "32828",
-  
-  },
-  {
-    first_name: "Hans",
-    last_name: "Haribo",
-    email: "Hans@example.com",
-    password: "password123",
-    address: "1234 Gummy Road",
-    city: "Orlando",
-    state: "Florida",
-    zipCode: "32803",
-    
-  },
-  {
-    first_name: "Gob",
-    last_name: "Stopper",
-    email: "Gob@example.com",
-    password: "password123",
-    address: "1234 Globbers Road",
-    city: "Orlando",
-    state: "Florida",
-    zipCode: "32806",
-    
-  },
-
 ];
 
 const seedUsers = () => User.bulkCreate(userData, {individualHooks: true});
