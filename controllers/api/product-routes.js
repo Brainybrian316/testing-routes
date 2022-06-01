@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const { Product, Category, User, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
         attributes: ['id', 'category_name'],
       },
       {
-        model: Tag,
-        attributes: ['id', 'tag_name'],
+        model: User,
+        attributes: ['id', 'first_name'],
       }
     ]
   })
@@ -39,8 +39,8 @@ router.get('/:id', (req, res) => {
           attributes: ['id', 'category_name']
         },
         {
-          model: Tag,
-          attributes: ['id', 'tag_name']
+          model: User,
+          attributes: ['id', 'first_name']
         }
       ]
         })
@@ -64,15 +64,15 @@ router.post('/', (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     category_id: req.body.category_id,
-    tagIds: req.body.tag_id
+    userIds: req.body.user_id
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      if (req.body.userIds.length) {
+        const productTagIdArr = req.body.userIds.map((user_id) => {
           return {
             product_id: product.id,
-            tag_id,
+            user_id,
           };
         });
         return ProductTag.bulkCreate(productTagIdArr);
@@ -101,19 +101,19 @@ router.put('/:id', (req, res) => {
     })
     .then((productTags) => {
       // get list of current tag_ids
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
+      const productTagIds = productTags.map(({ user_id }) => user_id);
       // create filtered list of new tag_ids
-      const newProductTags = req.body.tagIds
-        .filter((tag_id) => !productTagIds.includes(tag_id))
-        .map((tag_id) => {
+      const newProductTags = req.body.userIds
+        .filter((user_id) => !productTagIds.includes(user_id))
+        .map((user_id) => {
           return {
             product_id: req.params.id,
-            tag_id,
+            user_id,
           };
         });
       // figure out which ones to remove
       const productTagsToRemove = productTags
-        .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
+        .filter(({ user_id }) => !req.body.userIds.includes(user_id))
         .map(({ id }) => id);
 
       // run both actions
