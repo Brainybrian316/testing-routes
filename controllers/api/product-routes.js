@@ -5,13 +5,13 @@ const { User, Candy, Product } = require("../../models");
 
 // get all products
 router.get("/", (req, res) => {
-    // find all products
     Product.findAll({
-      include: [
-        User,
-        Candy
-      ],
-    }).then((products) => res.json(products));
+    }).then((dbProductData) => res.json(dbProductData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   });
+
 
   module.exports = router;
