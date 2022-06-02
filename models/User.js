@@ -14,6 +14,13 @@ User.init(
     },
     first_name: {
       type: DataTypes.STRING
+    },
+    candy_box: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'category',
+        key: 'id'
+      }
     }
   },
   {
