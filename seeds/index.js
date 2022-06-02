@@ -1,24 +1,25 @@
-const seedCategories = require('./category-seeds');
-const seedProducts = require('./product-seeds');
-const seedTags = require('./tag-seeds');
-const seedProductTags = require('./product-tag-seeds');
+const seedCandies = require('./candies-seeds');
+const seedCandyBox = require('./candybox-seeds');
+const seedSubscription = require('./subscription-seeds');
+const seedUsers = require('./users-seeds');
 
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('\n----- DATABASE SYNCED -----\n');
-  await seedCategories();
-  console.log('\n----- CATEGORIES SEEDED -----\n');
 
-  await seedProducts();
-  console.log('\n----- PRODUCTS SEEDED -----\n');
+  await seedCandies();
+  console.log('\n----- CANDIES SEEDED -----\n');
 
-  await seedTags();
-  console.log('\n----- TAGS SEEDED -----\n');
+  await seedCandyBox();
+  console.log('\n----- CANDYBOX SEEDED -----\n');
 
-  await seedProductTags();
-  console.log('\n----- PRODUCT TAGS SEEDED -----\n');
+  await seedUsers();
+  console.log('\n----- USERS SEEDED -----\n');
+
+  await seedSubscription();
+  console.log('\n----- SUBSCRIPTION SEEDED -----\n');
 
   process.exit(0);
 };

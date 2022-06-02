@@ -1,20 +1,20 @@
 const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const { CandyBox, Candies, Users, Subscription } = require('../../models');
 
 // The `/api/products` endpoint
 
 // get all products
 router.get('/', (req, res) => {
   // find all products
-  Product.findAll({ // be sure to include its  Category and Tag data
+  CandyBox.findAll({ // be sure to include its  Category and Tag data
     include: [
       {
-        model: Category,
-        attributes: ['id', 'category_name'],
+        model: Candies,
+        attributes: ['id', 'candy_name'],
       },
       {
-        model: Tag,
-        attributes: ['id', 'tag_name'],
+        model: Users,
+        attributes: ['id', 'first_name'],
       }
     ]
   })
@@ -28,19 +28,19 @@ router.get('/', (req, res) => {
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
-  Product.findOne({
+  CandyBox.findOne({
     where: {
       id: req.params.id
     },
       // be sure to include its associated Category and Tag data
       include: [
         {
-          model: Category,
-          attributes: ['id', 'category_name']
+          model: Candies,
+          attributes: ['id', 'candy_name']
         },
         {
-          model: Tag,
-          attributes: ['id', 'tag_name']
+          model: Users,
+          attributes: ['id', 'first_name']
         }
       ]
         })
@@ -60,22 +60,21 @@ router.get('/:id', (req, res) => {
 // create new product
 router.post('/', (req, res) => {
   Product.create({
-    product_name: req.body.product_name,
+    decade: req.body.decade,
     price: req.body.price,
     stock: req.body.stock,
-    category_id: req.body.category_id,
-    tagIds: req.body.tag_id
+    candies_id: req.body.category_id,
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      if (req.body.usersIds.length) {
+        const subscriptionIdArr = req.body.usersIds.map((tag_id) => {
           return {
             product_id: product.id,
-            tag_id,
+            users_id,
           };
         });
-        return ProductTag.bulkCreate(productTagIdArr);
+        return Subscription.bulkCreate(subscriptionIdArr);
       }
       // if no product tags, just respond
       res.status(200).json(product);
@@ -90,36 +89,36 @@ router.post('/', (req, res) => {
 // update product
 router.put('/:id', (req, res) => {
   // update product data
-  Product.update(req.body, {
+  CandyBox.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((product) => {
       // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: { product_id: req.params.id } });
+      return Subscription.findAll({ where: { subscription_id: req.params.id } });
     })
     .then((productTags) => {
       // get list of current tag_ids
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
+      const subscriptionIds = productTags.map(({ user_id }) => user_id);
       // create filtered list of new tag_ids
-      const newProductTags = req.body.tagIds
-        .filter((tag_id) => !productTagIds.includes(tag_id))
-        .map((tag_id) => {
+      const newsubscription = req.body.usersIds
+        .filter((users_id) => !subscriptionIds.includes(users_id))
+        .map((users_id) => {
           return {
-            product_id: req.params.id,
-            tag_id,
+            subscription_id: req.params.id,
+            users_id,
           };
         });
       // figure out which ones to remove
-      const productTagsToRemove = productTags
-        .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
+      const subscriptionToRemove = productTags
+        .filter(({ user_id }) => !req.body.userIds.includes(user_id))
         .map(({ id }) => id);
 
       // run both actions
       return Promise.all([
-        ProductTag.destroy({ where: { id: productTagsToRemove } }),
-        ProductTag.bulkCreate(newProductTags),
+        Subscription.destroy({ where: { id: subscriptionToRemove } }),
+        Subscription.bulkCreate(newsubscription),
       ]);
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
@@ -131,7 +130,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  Product.destroy({
+  CandyBox.destroy({
     where: {
       id: req.params.id
     }

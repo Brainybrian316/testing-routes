@@ -1,31 +1,33 @@
 // import models
-const Product = require('./Product');
-const Category = require('./Category');
-const Tag = require('./Tag');
-const ProductTag = require('./ProductTag');
+const CandyBox = require('./CandyBox');
+const Candies = require('./Candies');
+const Users = require('./Users');
+const Subscription = require('./Subscription');
+
 
 // Products belongsTo Category
-Product.belongsTo(Category, {
-  foreignKey: 'category_id'
+CandyBox.belongsTo(Candies, {
+  foreignKey: 'candies_id'
 });
 // Categories have many Products
-Category.hasMany(Product, {
-  foreignKey: 'category_id'
+Candies.hasMany(CandyBox, {
+  foreignKey: 'candies_id'
 });
 // Products belongToMany Tags (through ProductTag)
-Product.belongsToMany(Tag, {
-  through: ProductTag,
-  foreignKey: 'product_id'
+CandyBox.belongsToMany(Users, {
+  through: Subscription,
+  foreignKey: 'CandyBox_id',
 });
 // Tags belongToMany Products (through ProductTag)
-Tag.belongsToMany(Product, {
-  through: ProductTag,
-  foreignKey: 'tag_id'
+Users.belongsToMany(CandyBox, {
+  through: Subscription,
+  foreignKey: 'user_id',
 });
 
 module.exports = {
-  Product,
-  Category,
-  Tag,
-  ProductTag,
+  CandyBox,
+  Candies,
+  Users,
+  Subscription
+
 };

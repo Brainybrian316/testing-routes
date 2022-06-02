@@ -1,16 +1,16 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Users, CandyBox, Subscription } = require('../../models');
 
 // The `/api/tags` endpoint
 
 router.get('/', (req, res) => {
   // find all tags
-  Tag.findAll({
+  Users.findAll({
       // be sure to include its associated Product data
         include: [
           {
-            model: Product,
-            attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+            model: CandyBox,
+            attributes: ['id', 'decade', 'price', 'stock', 'candies_id'],
           }
         ]
   })
@@ -23,15 +23,15 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  Tag.findOne({
+  Users.findOne({
       where: {
         id: req.params.id
       },
         // be sure to include its associated Product data
           include: [
             {
-              model: Product,
-              attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+              model: CandyBox,
+              attributes: ['id', 'decade', 'price', 'stock', 'candies_id'],
             }
           ]
     })
@@ -50,8 +50,8 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
-  Tag.create({
-    tag_name: req.body.tag_name
+  Users.create({
+    first_name: req.body.first_name
   })
     .then(dbTagData => res.json(dbTagData))
     .catch(err => {
@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update(req.body, {
+  Users.update(req.body, {
       where: {
         id: req.params.id
       }
@@ -82,7 +82,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
-  Tag.destroy({
+  Users.destroy({
     where: {
       id: req.params.id
     }

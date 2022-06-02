@@ -4,10 +4,10 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // Initialize Product model (table) by extending off Sequelize's Model class
-class Product extends Model {}
+class CandyBox extends Model {}
 
 // set up fields and rules for Product model
-Product.init(
+CandyBox.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,7 +15,7 @@ Product.init(
       primaryKey: true,
       autoIncrement: true
     },
-    product_name: {
+    decade: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -35,10 +35,10 @@ Product.init(
       isInt: true
       }
     },
-    category_id: {
+    candies_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'category',
+        model: 'candies',
         key: 'id'
       }
     }
@@ -48,8 +48,8 @@ Product.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product',
+    modelName: 'candybox',
   }
 );
 
-module.exports = Product;
+module.exports = CandyBox;
