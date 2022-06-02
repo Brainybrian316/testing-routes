@@ -59,18 +59,17 @@ router.get('/:id', (req, res) => {
 
 // create new product
 router.post('/', (req, res) => {
-  Product.create({
+  CandyBox.create({
     decade: req.body.decade,
     price: req.body.price,
     stock: req.body.stock,
-    candies_id: req.body.category_id,
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.usersIds.length) {
-        const subscriptionIdArr = req.body.usersIds.map((tag_id) => {
+        const subscriptionIdArr = req.body.usersIds.map((users_id) => {
           return {
-            product_id: product.id,
+            candybox_id: product.id,
             users_id,
           };
         });

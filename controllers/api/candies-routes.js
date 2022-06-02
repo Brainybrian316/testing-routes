@@ -51,7 +51,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   Candies.create({
-    candy_name: req.body.candy_name
+    candy_name: req.body.candy_name,
+    candybox_id: req.body.candybox_id,
   })
     .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
