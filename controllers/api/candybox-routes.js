@@ -100,7 +100,7 @@ router.put('/:id', (req, res) => {
     })
     .then((productTags) => {
       // get list of current tag_ids
-      const subscriptionIds = productTags.map(({ user_id }) => user_id);
+      const subscriptionIds = productTags.map(({ users_id }) => users_id);
       // create filtered list of new tag_ids
       const newsubscription = req.body.usersIds
         .filter((users_id) => !subscriptionIds.includes(users_id))
@@ -112,7 +112,7 @@ router.put('/:id', (req, res) => {
         });
       // figure out which ones to remove
       const subscriptionToRemove = productTags
-        .filter(({ user_id }) => !req.body.userIds.includes(user_id))
+        .filter(({ users_id }) => !req.body.usersIds.includes(users_id))
         .map(({ id }) => id);
 
       // run both actions

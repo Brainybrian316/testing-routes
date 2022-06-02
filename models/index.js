@@ -16,12 +16,12 @@ Candies.hasMany(CandyBox, {
 // Products belongToMany Tags (through ProductTag)
 CandyBox.belongsToMany(Users, {
   through: Subscription,
-  foreignKey: 'CandyBox_id',
+  foreignKey: 'candybox_id',
 });
 // Tags belongToMany Products (through ProductTag)
 Users.belongsToMany(CandyBox, {
   through: Subscription,
-  foreignKey: 'user_id',
+  foreignKey: 'users_id',
 });
 
 module.exports = {
