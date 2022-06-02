@@ -25,6 +25,7 @@ CandyBox.belongsToMany(Users, {
   through: Subscription,
   foreignKey: 'candybox_id',
   onUpdate: 'cascade',
+  onDelete: 'set null'
 });
 // Tags belongToMany Products (through ProductTag)
 Users.belongsToMany(CandyBox, {
