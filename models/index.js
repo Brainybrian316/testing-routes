@@ -6,13 +6,20 @@ const Subscription = require('./Subscription');
 
 
 // Products belongsTo Category
-CandyBox.belongsTo(Candies, {
-  foreignKey: 'candies_id'
-});
-// Categories have many Products
-Candies.hasMany(CandyBox, {
-  foreignKey: 'candies_id'
-});
+// CandyBox.belongsTo(Candies, {
+//   foreignKey: 'candies_id'
+// });
+// // Categories have many Products
+// Candies.hasMany(CandyBox, {
+//   foreignKey: 'candies_id'
+// });
+Candies.belongsTo(CandyBox, {
+  foreignKey: 'candybox_id'
+})
+CandyBox.hasMany(Candies, {
+  foreignKey: 'candybox_id'
+})
+
 // Products belongToMany Tags (through ProductTag)
 CandyBox.belongsToMany(Users, {
   through: Subscription,

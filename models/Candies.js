@@ -15,6 +15,13 @@ Candies.init(
     candy_name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    candybox_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'candybox',
+        key: 'id'
+      }
     }
   },
   {

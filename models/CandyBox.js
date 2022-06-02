@@ -34,15 +34,16 @@ CandyBox.init(
       Validate: {
       isInt: true
       }
-    },
-    candies_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'candies',
-        key: 'id'
-      }
-    }
+    // },
+    // candies_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'candies',
+    //     key: 'id'
+    //   }
+    // }
   },
+},
   {
     sequelize,
     timestamps: false,

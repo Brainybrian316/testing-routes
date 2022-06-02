@@ -9,11 +9,12 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('\n----- DATABASE SYNCED -----\n');
 
+  await seedCandyBox();
+  console.log('\n----- CANDYBOX SEEDED -----\n');
+  
   await seedCandies();
   console.log('\n----- CANDIES SEEDED -----\n');
 
-  await seedCandyBox();
-  console.log('\n----- CANDYBOX SEEDED -----\n');
 
   await seedUsers();
   console.log('\n----- USERS SEEDED -----\n');
